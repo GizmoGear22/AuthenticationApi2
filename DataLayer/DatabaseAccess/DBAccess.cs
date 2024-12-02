@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Models
+namespace DataLayer.DatabaseAccess
 {
-    internal class Login
+    public class DBAccess
     {
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Models
 {
-    public class NewUserModel
+    public class LoginModel
     {
         [Required]
         public int Id { get; set; }
@@ -16,19 +16,10 @@ namespace Models
         public string Name { get; set; }
         [Required]
         [MaxLength(50)]
-        public string Password { get; set; }
-        [Required]
-        [MaxLength(50)]
-        public string CheckPassword { get; set; }
-        [Required]
-        [MaxLength(50)]
         public string Email { get; set; }
-        public string Role { get; set; } = "RegUser";
-    }
-
-    public enum UserRoles
-    {
-        Admin,
-        RegUser
+        [Required]
+        [MaxLength(50)]
+        public string Password { get; set; }
+        public string Role { get; set; }
     }
 }
