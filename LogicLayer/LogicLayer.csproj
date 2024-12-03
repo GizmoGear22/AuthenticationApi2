@@ -12,4 +12,8 @@
     <Folder Include="DbLogic\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DataLayer\DataLayer.csproj" />
+  </ItemGroup>
+
 </Project>
