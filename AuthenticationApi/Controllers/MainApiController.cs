@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using LogicLayer.ApiLogic;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
 
@@ -8,6 +9,12 @@ namespace AuthenticationApi.Controllers
     [Route("/api/[controller]")]
     public class MainApiController : Controller
     {
+
+        private readonly IApiAccessLogic _accessLogic;
+        public MainApiController(IApiAccessLogic accessLogic)
+        {
+            _accessLogic = accessLogic;
+        }
         [HttpPost]
         public async Task AddNewUser([FromBody]NewUserModel model)
         {

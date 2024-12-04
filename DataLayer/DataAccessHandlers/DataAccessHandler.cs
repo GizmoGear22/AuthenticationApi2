@@ -5,17 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using DataLayer.DatabaseAccess;
 using Microsoft.Extensions.Configuration;
+using Models;
 
 namespace DataLayer.DataAccessHandlers
 {
-    public class DataAccessHandler
+    public class DataAccessHandler : IDataAccessHandler
     {
         private readonly DBAccess _dbAccess;
-        private readonly IConfiguration _config;
-        public DataAccessHandler(DBAccess dbAccess, IConfiguration config)
+        public DataAccessHandler(DBAccess dbAccess)
         {
             _dbAccess = dbAccess;
-            _config = config;
+        }
+
+        public async Task AddUserToRepo(LoginModel login)
+        {
+            await _dbAccess.LoginCredentials.AddAsync(login);
+            await _dbAccess.SaveChangesAsync();
         }
     }
 }
