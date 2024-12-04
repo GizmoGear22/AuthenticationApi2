@@ -11,7 +11,7 @@ namespace LogicLayer.DbLogic
     public class RepoAccessLogic : IRepoAccessLogic
     {
         private readonly IDataAccessHandler _handler;
-        private RepoAccessLogic(IDataAccessHandler handler)
+        public RepoAccessLogic(IDataAccessHandler handler)
         {
             _handler = handler;
         }

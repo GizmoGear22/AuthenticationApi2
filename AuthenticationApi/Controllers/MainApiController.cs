@@ -18,14 +18,15 @@ namespace AuthenticationApi.Controllers
         [HttpPost]
         public async Task AddNewUser([FromBody]NewUserModel model)
         {
-            throw new NotImplementedException();
+            await _accessLogic.AddUser(model);
         }
-
+        /*
         [HttpPost]
         public async Task CheckUserCredentials([FromBody]LoginModel model)
         {
             throw new NotImplementedException();
         }
+        */
 
     }
 }
