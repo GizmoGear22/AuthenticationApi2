@@ -17,19 +17,12 @@ namespace AuthenticationApi.Controllers
             _accessLogic = accessLogic;
         }
         [HttpPost]
-        public async Task<IActionResult> AddNewUser([FromBody]NewUserModel model)
+        public async Task AddNewUser([FromBody]NewUserModel model)
         {
-            try
-            {
                 await _accessLogic.AddUser(model);
-                return Ok(model);
-            }
-            catch (ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
-
         }
+
+
         /*
         [HttpPost]
         public async Task CheckUserCredentials([FromBody]LoginModel model)

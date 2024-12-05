@@ -1,10 +1,14 @@
 using AuthenticationLayer;
 using DataLayer.DataAccessHandlers;
 using DataLayer.DatabaseAccess;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using LogicLayer.ApiLogic;
 using LogicLayer.DbLogic;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Models;
+using ValidationLayer;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +24,9 @@ builder.Services.AddTransient<IRepoAccessLogic, RepoAccessLogic>();
 builder.Services.AddTransient<IApiAccessLogic, ApiAccessLogic>();
 //Logging
 builder.Services.AddLogging(options => options.AddConsole());
+
+//FluentValidation Middleware
+builder.Services.AddValidatorsFromAssemblyContaining<NewUserValidation>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
