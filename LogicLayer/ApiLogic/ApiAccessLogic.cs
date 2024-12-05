@@ -8,6 +8,9 @@ using FluentValidation.Results;
 using LogicLayer.DbLogic;
 using Models;
 using ValidationLayer;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
+using FluentValidation;
 
 namespace LogicLayer.ApiLogic
 {
@@ -21,16 +24,15 @@ namespace LogicLayer.ApiLogic
         }
 
         public async Task AddUser(NewUserModel model)
-        {
-            LoginModel loginModel = new LoginModel();
-
-            List<string> errors = new List<string>();   
+        {  
 
             NewUserValidation validator = new NewUserValidation();
             var results = validator.Validate(model);
 
             if (results.IsValid == true)
             {
+                LoginModel loginModel = new LoginModel();
+
                 loginModel.Id = model.Id;
                 loginModel.Name = model.Name;
                 loginModel.Email = model.Email;
@@ -40,18 +42,14 @@ namespace LogicLayer.ApiLogic
                 await _handler.AddUserToRepo(loginModel);
             } else
             {
+                List<string> errors = new List<string>();
                 foreach (var error in results.Errors)
                 {
                     errors.Add($"{error.PropertyName}: {error.ErrorMessage}");
                 }
 
+                await validator.ValidateAndThrowAsync(model);
             }
-
-
-
-
-
-
 
         }
     }

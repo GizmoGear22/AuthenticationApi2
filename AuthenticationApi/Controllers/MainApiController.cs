@@ -1,4 +1,5 @@
-﻿using LogicLayer.ApiLogic;
+﻿using System.ComponentModel.DataAnnotations;
+using LogicLayer.ApiLogic;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Models;
@@ -16,9 +17,18 @@ namespace AuthenticationApi.Controllers
             _accessLogic = accessLogic;
         }
         [HttpPost]
-        public async Task AddNewUser([FromBody]NewUserModel model)
+        public async Task<IActionResult> AddNewUser([FromBody]NewUserModel model)
         {
-            await _accessLogic.AddUser(model);
+            try
+            {
+                await _accessLogic.AddUser(model);
+                return Ok(model);
+            }
+            catch (ValidationException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+
         }
         /*
         [HttpPost]
