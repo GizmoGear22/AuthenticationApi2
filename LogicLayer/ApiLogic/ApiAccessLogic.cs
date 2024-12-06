@@ -52,5 +52,19 @@ namespace LogicLayer.ApiLogic
             }
 
         }
+
+        public async Task<bool> CheckLoginCredentials(UserLoginModel model)
+        {
+            LoginModel user = await _handler.AccessUserFromRepo(model);
+            if (user != null && user.Password.Equals(model.Password) )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+        }
     }
 }
