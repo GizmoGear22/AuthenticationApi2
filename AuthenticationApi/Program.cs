@@ -73,7 +73,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.UseMiddleware<ApiAuthMiddleware>();
+//app.UseMiddleware<ApiAuthMiddleware>();
 
 app.UseAuthorization();
 

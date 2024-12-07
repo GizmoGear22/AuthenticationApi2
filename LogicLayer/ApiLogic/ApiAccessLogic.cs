@@ -52,5 +52,15 @@ namespace LogicLayer.ApiLogic
             }
 
         }
+
+        public async Task<bool> CheckUserCredentials(UserLoginModel model)
+        {
+            var user = await _handler.FindUserByName(model);
+            if (user != null)
+            {
+                return true;
+            }
+            else { return false; }
+        }
     }
 }

@@ -19,5 +19,11 @@ namespace LogicLayer.DbLogic
         {
             await _handler.AddUserToRepo(model);
         }
+
+        public async Task<LoginModel> FindUserByName(UserLoginModel model)
+        {
+            var user = await _handler.SearchRepoByName(model);
+            return user;
+        }
     }
 }

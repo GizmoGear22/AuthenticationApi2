@@ -6,5 +6,6 @@ namespace LogicLayer.ApiLogic
     public interface IApiAccessLogic
     {
         Task AddUser(NewUserModel model);
+        Task<bool> CheckUserCredentials(UserLoginModel model);
     }
 }

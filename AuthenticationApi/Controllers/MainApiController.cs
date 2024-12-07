@@ -23,13 +23,11 @@ namespace AuthenticationApi.Controllers
         }
 
 
-        /*
         [HttpPost]
-        public async Task CheckUserCredentials([FromBody]LoginModel model)
+        public async Task UserLogin([FromBody]UserLoginModel model)
         {
-            throw new NotImplementedException();
+            bool user = await _accessLogic.CheckUserCredentials(model);
         }
-        */
 
     }
 }
