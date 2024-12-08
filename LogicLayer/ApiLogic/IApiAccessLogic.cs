@@ -7,5 +7,6 @@ namespace LogicLayer.ApiLogic
     {
         Task AddUser(NewUserModel model);
         Task<bool> CheckUserCredentials(UserLoginModel model);
+        Task<LoginModel> UserLogin(UserLoginModel model);
     }
 }

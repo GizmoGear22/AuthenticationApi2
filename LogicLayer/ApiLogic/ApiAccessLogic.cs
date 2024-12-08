@@ -59,6 +59,12 @@ namespace LogicLayer.ApiLogic
 
         }
 
+        public async Task<LoginModel>UserLogin(UserLoginModel model)
+        {
+            var user = await _handler.FindUserByName(model);
+            return user;
+        }
+
         public async Task<bool> CheckUserCredentials(UserLoginModel model)
         {
             UserLoginValidator validator = new UserLoginValidator(_dataAccessHandler);

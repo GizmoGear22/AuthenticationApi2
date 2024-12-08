@@ -35,10 +35,11 @@ namespace AuthenticationApi.Controllers
         {
             try
             {
-                bool user = await _accessLogic.CheckUserCredentials(model);
-                if (user == true)
+                bool checkUser = await _accessLogic.CheckUserCredentials(model);
+                if (checkUser == true)
                 {
-                    //var token = _tokenGen.GenerateJSONToken(model)
+                    var user = await _accessLogic.UserLogin(model);
+                    var token = _tokenGen.GenerateJSONToken(user);
                 }
 
             }
