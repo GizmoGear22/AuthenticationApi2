@@ -12,22 +12,35 @@ namespace AuthenticationApi.Controllers
     {
 
         private readonly IApiAccessLogic _accessLogic;
-        public MainApiController(IApiAccessLogic accessLogic)
+        private readonly ILogger<MainApiController> _logger;
+        public MainApiController(IApiAccessLogic accessLogic, ILogger<MainApiController> logger)
         {
             _accessLogic = accessLogic;
+            _logger = logger;
         }
         [HttpPost]
+        [Route("/NewUser")]
         public async Task AddNewUser([FromBody]NewUserModel model)
         {
                 await _accessLogic.AddUser(model);
         }
 
-
+        
         [HttpPost]
+        [Route("/UserLogin")]
         public async Task UserLogin([FromBody]UserLoginModel model)
         {
-            bool user = await _accessLogic.CheckUserCredentials(model);
+            try
+            {
+                bool user = await _accessLogic.CheckUserCredentials(model);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error Occured");
+            }
+
         }
+        
 
     }
 }

@@ -22,7 +22,7 @@ namespace LogicLayer.DbLogic
 
         public async Task<LoginModel> FindUserByName(UserLoginModel model)
         {
-            var user = await _handler.SearchRepoByName(model);
+            var user = await _handler.SearchRepoByName(model.Username);
             return user;
         }
     }

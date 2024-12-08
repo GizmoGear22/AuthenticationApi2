@@ -24,9 +24,9 @@ namespace DataLayer.DataAccessHandlers
             await _dbAccess.SaveChangesAsync();
         }
 
-        public async Task<LoginModel> SearchRepoByName(UserLoginModel model)
+        public async Task<LoginModel> SearchRepoByName(string userName)
         {
-            var user = await _dbAccess.LoginCredentials.Where(p => p.Name == model.Username).FirstOrDefaultAsync();
+            var user = await _dbAccess.LoginCredentials.Where(p => p.Name == userName).FirstOrDefaultAsync();
             return user ;
         }
     }

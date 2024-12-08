@@ -5,6 +5,6 @@ namespace DataLayer.DataAccessHandlers
     public interface IDataAccessHandler
     {
         Task AddUserToRepo(LoginModel login);
-        Task<LoginModel> SearchRepoByName(UserLoginModel model);
+        Task<LoginModel> SearchRepoByName(string userName);
     }
 }
