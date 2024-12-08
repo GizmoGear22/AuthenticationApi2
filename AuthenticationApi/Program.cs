@@ -22,6 +22,7 @@ builder.Services.AddDbContext<DBAccess>(options => { options.UseSqlServer(builde
 builder.Services.AddTransient<IDataAccessHandler, DataAccessHandler>();
 builder.Services.AddTransient<IRepoAccessLogic, RepoAccessLogic>();
 builder.Services.AddTransient<IApiAccessLogic, ApiAccessLogic>();
+builder.Services.AddTransient<ITokenGeneration, TokenGeneration>();
 //Logging
 builder.Services.AddLogging(options => options.AddConsole());
 

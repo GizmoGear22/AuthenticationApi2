@@ -25,5 +25,6 @@ namespace LogicLayer.DbLogic
             var user = await _handler.SearchRepoByName(model.Username);
             return user;
         }
+
     }
 }

@@ -71,6 +71,11 @@ namespace LogicLayer.ApiLogic
             }
             catch (Exception ex)
             {
+                List<string> errors = new List<string> ();
+                foreach (var error in results.Errors)
+                {
+                    errors.Add($"{error.PropertyName}: {error.ErrorMessage}");
+                }
                 _logger.LogError(ex, "Error encountered");
                 return false;
             }
