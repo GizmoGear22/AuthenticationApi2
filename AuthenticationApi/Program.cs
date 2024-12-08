@@ -27,6 +27,7 @@ builder.Services.AddLogging(options => options.AddConsole());
 
 //FluentValidation Middleware
 builder.Services.AddValidatorsFromAssemblyContaining<NewUserValidation>();
+builder.Services.AddValidatorsFromAssemblyContaining<UserLoginValidator>();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

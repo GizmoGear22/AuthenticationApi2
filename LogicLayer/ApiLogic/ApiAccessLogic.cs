@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 using FluentValidation;
 using Microsoft.Extensions.Logging;
+using DataLayer.DataAccessHandlers;
 
 namespace LogicLayer.ApiLogic
 {
@@ -19,11 +20,13 @@ namespace LogicLayer.ApiLogic
     {
         private readonly IRepoAccessLogic _handler;
         private readonly ILogger<ApiAccessLogic> _logger;
+        private readonly IDataAccessHandler _dataAccessHandler;
 
-        public ApiAccessLogic(IRepoAccessLogic handler, ILogger<ApiAccessLogic> logger)
+        public ApiAccessLogic(IRepoAccessLogic handler, ILogger<ApiAccessLogic> logger, IDataAccessHandler dataAccessHandler)
         {
             _handler = handler;
             _logger = logger;
+            _dataAccessHandler = dataAccessHandler;
         }
 
         public async Task AddUser(NewUserModel model)
@@ -58,20 +61,20 @@ namespace LogicLayer.ApiLogic
 
         public async Task<bool> CheckUserCredentials(UserLoginModel model)
         {
+            UserLoginValidator validator = new UserLoginValidator(_dataAccessHandler);
+            var results = await validator.ValidateAsync(model);
+
             try
             {
-                var user = await _handler.FindUserByName(model);
-                if (user != null)
-                {
-                    return true;
-                }
-                else { return false; }
+                if (results.IsValid)
+                    { return true; }
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "Error encountered");
                 return false;
             }
+            return true;
 
         }
     }
