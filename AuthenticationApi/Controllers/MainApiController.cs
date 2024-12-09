@@ -23,15 +23,15 @@ namespace AuthenticationApi.Controllers
         }
         [HttpPost]
         [Route("/NewUser")]
-        public async Task AddNewUser([FromBody]NewUserModel model)
+        public async Task AddNewUser([FromBody] NewUserModel model)
         {
-                await _accessLogic.AddUser(model);
+            await _accessLogic.AddUser(model);
         }
 
-        
+
         [HttpPost]
         [Route("/UserLogin")]
-        public async Task UserLogin([FromBody]UserLoginModel model)
+        public async Task UserLogin([FromBody] UserLoginModel model)
         {
             try
             {
@@ -48,6 +48,20 @@ namespace AuthenticationApi.Controllers
                 _logger.LogError(ex, "Error Occured");
             }
 
+        }
+
+        [HttpGet]
+        [Route("/GetAllUsers")]
+        public async Task SeeAllUsers()
+        {
+            await _accessLogic.GetAllUsers();
+        }
+
+        [HttpDelete("{id:int}")]
+        [Route("/DeleteById")]
+        public async Task DeleteUserById(int id)
+        {
+            await _accessLogic.
         }
         
 

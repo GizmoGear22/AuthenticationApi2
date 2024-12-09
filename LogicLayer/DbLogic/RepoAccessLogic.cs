@@ -26,5 +26,28 @@ namespace LogicLayer.DbLogic
             return user;
         }
 
+        public async Task<LoginModel> FindUserById(LoginModel model)
+        {
+            var user = await _handler.SearchRepoById(model.Id);
+            return user;
+        }
+
+        public async Task<LoginModel> FindUserById(int id)
+        {
+            var user = await _handler.SearchRepoById(id);
+            return user;
+        }
+
+        public async Task<List<LoginModel>> GetAllUsersFromRepo()
+        {
+            var users = await _handler.RetrieveAllUsersFromRepo();
+            return users;
+        }
+
+        public async Task DeleteUserFromRepo(LoginModel user)
+        {
+            _handler.RemoveUserFromRepo(user);
+        }
+
     }
 }

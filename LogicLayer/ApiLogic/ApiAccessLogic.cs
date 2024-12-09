@@ -59,6 +59,17 @@ namespace LogicLayer.ApiLogic
 
         }
 
+        public async Task GetAllUsers()
+        {
+            await _handler.GetAllUsersFromRepo();
+        }
+
+        public async Task DeleteUserById(int id)
+        {
+            var user = await _handler.FindUserById(id);
+        }
+
+
         public async Task<LoginModel>UserLogin(UserLoginModel model)
         {
             var user = await _handler.FindUserByName(model);
@@ -88,5 +99,7 @@ namespace LogicLayer.ApiLogic
             return true;
 
         }
+
+
     }
 }
