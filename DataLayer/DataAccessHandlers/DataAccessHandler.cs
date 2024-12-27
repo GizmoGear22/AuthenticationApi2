@@ -27,7 +27,7 @@ namespace DataLayer.DataAccessHandlers
         public async Task<LoginModel> SearchRepoByName(string userName)
         {
             var user = await _dbAccess.LoginCredentials.Where(p => p.Name == userName).FirstOrDefaultAsync();
-            if (user == null)
+            if (user != null)
 
             { return user; }
             else
@@ -42,15 +42,16 @@ namespace DataLayer.DataAccessHandlers
             return user;
         }
 
-        public async Task RemoveUserFromRepo(LoginModel user)
+        public async Task RemoveUserFromRepo(int id) 
         {
+            var user = await SearchRepoById(id);
             _dbAccess.LoginCredentials.Remove(user);
             await _dbAccess.SaveChangesAsync();
         }
 
         public async Task<List<LoginModel>> RetrieveAllUsersFromRepo()
         {
-            var users = await _dbAccess.LoginCredentials.ToListAsync();
+            var users = await _dbAccess.LoginCredentials.ToListAsync(); 
             return users;
         }
     }

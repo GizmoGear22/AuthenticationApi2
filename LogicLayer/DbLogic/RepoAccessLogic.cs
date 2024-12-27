@@ -44,9 +44,9 @@ namespace LogicLayer.DbLogic
             return users;
         }
 
-        public async Task DeleteUserFromRepo(LoginModel user)
+        public async Task DeleteUserFromRepo(int id)
         {
-            _handler.RemoveUserFromRepo(user);
+            await _handler.RemoveUserFromRepo(id);
         }
 
     }

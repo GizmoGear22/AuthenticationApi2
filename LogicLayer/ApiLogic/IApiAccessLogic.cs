@@ -8,7 +8,7 @@ namespace LogicLayer.ApiLogic
         Task AddUser(NewUserModel model);
         Task<bool> CheckUserCredentials(UserLoginModel model);
         Task<LoginModel> UserLogin(UserLoginModel model);
-        Task GetAllUsers();
+        Task<List<LoginModel>> GetAllUsers();
         Task DeleteUserById(int id);
     }
 }

@@ -9,6 +9,6 @@ namespace LogicLayer.DbLogic
         Task<LoginModel> FindUserById(LoginModel model);
         Task<LoginModel> FindUserById(int id);
         Task<List<LoginModel>> GetAllUsersFromRepo();
-        Task DeleteUserFromRepo(LoginModel model);
+        Task DeleteUserFromRepo(int id);
     }
 }

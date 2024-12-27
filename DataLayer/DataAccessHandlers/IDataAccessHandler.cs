@@ -7,7 +7,7 @@ namespace DataLayer.DataAccessHandlers
         Task AddUserToRepo(LoginModel login);
         Task<LoginModel> SearchRepoByName(string userName);
         Task<LoginModel> SearchRepoById(int id);
-        Task RemoveUserFromRepo(LoginModel user);
+        Task RemoveUserFromRepo(int id);
         Task<List<LoginModel>> RetrieveAllUsersFromRepo();
     }
 }

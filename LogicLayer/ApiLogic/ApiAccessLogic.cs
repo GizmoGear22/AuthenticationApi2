@@ -59,14 +59,15 @@ namespace LogicLayer.ApiLogic
 
         }
 
-        public async Task GetAllUsers()
+        public async Task<List<LoginModel>> GetAllUsers()
         {
-            await _handler.GetAllUsersFromRepo();
+           var users = await _handler.GetAllUsersFromRepo();
+            return users.ToList();
         }
 
         public async Task DeleteUserById(int id)
         {
-            var user = await _handler.FindUserById(id);
+            await _handler.DeleteUserFromRepo(id);
         }
 
 

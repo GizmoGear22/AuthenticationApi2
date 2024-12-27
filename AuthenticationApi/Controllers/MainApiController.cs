@@ -22,7 +22,7 @@ namespace AuthenticationApi.Controllers
             _tokenGen = tokenGen;
         }
         [HttpPost]
-        [Route("/NewUser")]
+        [Route("NewUser")]
         public async Task AddNewUser([FromBody] NewUserModel model)
         {
             await _accessLogic.AddUser(model);
@@ -30,40 +30,53 @@ namespace AuthenticationApi.Controllers
 
 
         [HttpPost]
-        [Route("/UserLogin")]
-        public async Task UserLogin([FromBody] UserLoginModel model)
+        [Route("UserLogin")]
+        public async Task<IActionResult> UserLogin([FromBody] UserLoginModel model)
+        {
+
+            if (model != null)
+            {
+               bool checkUser = await _accessLogic.CheckUserCredentials(model);
+               if (checkUser == true)
+               {
+                   var user = await _accessLogic.UserLogin(model);
+                   var token = _tokenGen.GenerateJSONToken(user);
+               }
+
+                   return Ok();
+               }
+            else
+               {
+                   return BadRequest("Need a proper person");
+               }
+        }
+
+        [HttpGet]
+        [Route("GetAllUsers")]
+        public async Task<IEnumerable<LoginModel>> SeeAllUsers()
+        {
+            var users = await _accessLogic.GetAllUsers();
+            return users.ToList();
+        }
+
+   
+        [HttpDelete("DeleteById/{id}")]
+        public async Task<IActionResult> DeleteUserById(int id)
         {
             try
             {
-                bool checkUser = await _accessLogic.CheckUserCredentials(model);
-                if (checkUser == true)
-                {
-                    var user = await _accessLogic.UserLogin(model);
-                    var token = _tokenGen.GenerateJSONToken(user);
-                }
+                await _accessLogic.DeleteUserById(id);
+                return NoContent();
 
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Error Occured");
+                _logger.LogError(ex, ex.Message);
+                return BadRequest(ex.Message);
             }
 
         }
-
-        [HttpGet]
-        [Route("/GetAllUsers")]
-        public async Task SeeAllUsers()
-        {
-            await _accessLogic.GetAllUsers();
-        }
-
-        [HttpDelete("{id:int}")]
-        [Route("/DeleteById")]
-        public async Task DeleteUserById(int id)
-        {
-            await _accessLogic.
-        }
-        
+             
 
     }
 }
